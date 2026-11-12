@@ -13,3 +13,5 @@ data "terraform_remote_state" "testing_infrastructure" {
 data "aws_eks_cluster" "testing" {
   name = data.terraform_remote_state.testing_infrastructure.outputs.cluster_name
 }
+
+data "aws_caller_identity" "current" {}

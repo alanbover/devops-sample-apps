@@ -4,7 +4,15 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 6.72.0"
+      version = ">= 6.72.0, < 7.0.0"
+    }
+    postgresql = {
+      source  = "cyrilgdn/postgresql"
+      version = ">= 1.27.0, < 2.0.0"
+    }
+    tunnel = {
+      source  = "dfns/tunnel"
+      version = ">= 1.9.6, < 2.0.0"
     }
   }
 
@@ -28,4 +36,16 @@ provider "aws" {
       Application = "rds1"
     }
   }
+}
+
+provider "postgresql" {
+  host            = ephemeral.tunnel_ssm.database.local_host
+  port            = ephemeral.tunnel_ssm.database.local_port
+  database        = module.rds.database_name
+  username        = module.rds.master_username
+  password        = jsondecode(ephemeral.aws_secretsmanager_secret_version.master.secret_string).password
+  superuser       = false
+  sslmode         = "verify-ca"
+  sslrootcert     = "${path.module}/rds-eu-north-1-bundle.pem"
+  connect_timeout = 15
 }

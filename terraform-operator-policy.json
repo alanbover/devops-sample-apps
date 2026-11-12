@@ -2,7 +2,6 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "TerraformStateBucketManagement",
       "Effect": "Allow",
       "Action": [
         "s3:CreateBucket",
@@ -15,74 +14,28 @@
         "s3:PutEncryptionConfiguration",
         "s3:PutBucketTagging"
       ],
-      "Resource": "arn:aws:s3:::devops-sample-apps-tfstate-594081136085-eu-north-1"
+      "Resource": "arn:aws:s3:::devops-sample-apps-tfstate-*"
     },
     {
-      "Sid": "ManageStateObjects",
       "Effect": "Allow",
       "Action": [
         "s3:GetObject",
         "s3:PutObject",
         "s3:DeleteObject"
       ],
-      "Resource": [
-        "arn:aws:s3:::devops-sample-apps-tfstate-594081136085-eu-north-1/*"
-      ]
+      "Resource": "arn:aws:s3:::devops-sample-apps-tfstate-*/*"
     },
     {
-      "Sid": "DescribeIamResources",
       "Effect": "Allow",
       "Action": [
-        "iam:GetOpenIDConnectProvider",
-        "iam:GetPolicy",
-        "iam:GetPolicyVersion",
-        "iam:GetRole",
-        "iam:ListAttachedRolePolicies",
-        "iam:ListOpenIDConnectProviders",
-        "iam:ListPolicyVersions",
-        "iam:ListRolePolicies",
-        "sts:GetCallerIdentity"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "DescribeRegionalInfrastructure",
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeAddresses",
-        "ec2:DescribeAddressesAttribute",
-        "ec2:DescribeAvailabilityZones",
-        "ec2:DescribeInternetGateways",
-        "ec2:DescribeNatGateways",
-        "ec2:DescribeNetworkInterfaces",
-        "ec2:DescribeRouteTables",
-        "ec2:DescribeSecurityGroupRules",
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeSubnets",
-        "ec2:DescribeVpcAttribute",
-        "ec2:DescribeVpcs",
-        "eks:DescribeCluster",
-        "eks:DescribeNodegroup",
-        "eks:ListAddons",
-        "eks:ListNodegroups",
-        "eks:ListTagsForResource"
-      ],
-      "Resource": "*",
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestedRegion": "eu-north-1"
-        }
-      }
-    },
-    {
-      "Sid": "ManageStockholmVpc",
-      "Effect": "Allow",
-      "Action": [
+        "ec2:Describe*",
+        "ec2:Get*",
         "ec2:AssociateAddress",
         "ec2:AssociateRouteTable",
         "ec2:AttachInternetGateway",
         "ec2:AllocateAddress",
         "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:AuthorizeSecurityGroupEgress",
         "ec2:CreateInternetGateway",
         "ec2:CreateNatGateway",
         "ec2:CreateRoute",
@@ -107,34 +60,44 @@
         "ec2:ReleaseAddress",
         "ec2:ReplaceRoute",
         "ec2:RevokeSecurityGroupEgress",
-        "ec2:RevokeSecurityGroupIngress"
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:RunInstances",
+        "ec2:TerminateInstances",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:AssociateIamInstanceProfile",
+        "ec2:DisassociateIamInstanceProfile",
+        "ec2:ReplaceIamInstanceProfileAssociation",
+        "ec2:ModifyInstanceAttribute"
       ],
-      "Resource": "*",
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestedRegion": "eu-north-1"
-        }
-      }
+      "Resource": "*"
     },
     {
-      "Sid": "DescribeStockholmRds",
       "Effect": "Allow",
       "Action": [
-        "rds:DescribeDBInstances",
-        "rds:DescribeDBSubnetGroups",
-        "rds:ListTagsForResource"
+        "eks:Describe*",
+        "eks:List*",
+        "eks:CreateCluster",
+        "eks:CreateNodegroup",
+        "eks:CreateAddon",
+        "eks:DeleteCluster",
+        "eks:DeleteNodegroup",
+        "eks:DeleteAddon",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "eks:UpdateClusterConfig",
+        "eks:UpdateClusterVersion",
+        "eks:UpdateNodegroupConfig",
+        "eks:UpdateNodegroupVersion",
+        "eks:UpdateAddon"
       ],
-      "Resource": "*",
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestedRegion": "eu-north-1"
-        }
-      }
+      "Resource": "*"
     },
     {
-      "Sid": "ManageExerciseRds",
       "Effect": "Allow",
       "Action": [
+        "rds:Describe*",
+        "rds:ListTagsForResource",
         "rds:AddTagsToResource",
         "rds:CreateDBInstance",
         "rds:CreateDBSubnetGroup",
@@ -144,50 +107,41 @@
         "rds:ModifyDBSubnetGroup",
         "rds:RemoveTagsFromResource"
       ],
-      "Resource": [
-        "arn:aws:rds:eu-north-1:594081136085:db:devops-exercise-*",
-        "arn:aws:rds:eu-north-1:594081136085:subgrp:devops-exercise-*"
-      ]
+      "Resource": "*"
     },
     {
-      "Sid": "CreateRdsManagedPasswordSecret",
       "Effect": "Allow",
       "Action": [
         "secretsmanager:CreateSecret",
-        "secretsmanager:TagResource"
+        "secretsmanager:TagResource",
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret"
       ],
-      "Resource": "arn:aws:secretsmanager:eu-north-1:594081136085:secret:rds!db-*"
+      "Resource": "arn:aws:secretsmanager:*:*:secret:rds!db-*"
     },
     {
-      "Sid": "DescribeRdsSecretEncryptionKey",
       "Effect": "Allow",
       "Action": "kms:DescribeKey",
-      "Resource": "arn:aws:kms:eu-north-1:594081136085:key/*"
+      "Resource": "arn:aws:kms:*:*:key/*"
     },
     {
-      "Sid": "ManageStockholmEks",
       "Effect": "Allow",
       "Action": [
-        "eks:CreateCluster",
-        "eks:CreateNodegroup",
-        "eks:DeleteCluster",
-        "eks:DeleteNodegroup",
-        "eks:TagResource",
-        "eks:UntagResource",
-        "eks:UpdateClusterConfig",
-        "eks:UpdateClusterVersion",
-        "eks:UpdateNodegroupConfig",
-        "eks:UpdateNodegroupVersion"
+        "iam:GetOpenIDConnectProvider",
+        "iam:GetPolicy",
+        "iam:GetPolicyVersion",
+        "iam:GetRole",
+        "iam:GetInstanceProfile",
+        "iam:ListAttachedRolePolicies",
+        "iam:ListOpenIDConnectProviders",
+        "iam:ListPolicyVersions",
+        "iam:ListRolePolicies",
+        "iam:ListInstanceProfilesForRole",
+        "sts:GetCallerIdentity"
       ],
-      "Resource": "*",
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestedRegion": "eu-north-1"
-        }
-      }
+      "Resource": "*"
     },
     {
-      "Sid": "ManageExerciseIamRoles",
       "Effect": "Allow",
       "Action": [
         "iam:CreateRole",
@@ -197,15 +151,31 @@
         "iam:UpdateAssumeRolePolicy"
       ],
       "Resource": [
-        "arn:aws:iam::*:role/devops-exercise-*-eu-north-1-*",
-        "arn:aws:iam::*:role/aws-lbc-testing-*",
-        "arn:aws:iam::*:role/aws-lbc-production-*",
-        "arn:aws:iam::*:role/aws-ca-testing-*",
-        "arn:aws:iam::*:role/aws-ca-production-*"
+        "arn:aws:iam::*:role/devops-exercise-*",
+        "arn:aws:iam::*:role/aws-lbc-*",
+        "arn:aws:iam::*:role/aws-ca-*"
       ]
     },
     {
-      "Sid": "ManageExerciseControllerPolicies",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateUser",
+        "iam:DeleteUser",
+        "iam:GetUser",
+        "iam:TagUser",
+        "iam:UntagUser",
+        "iam:ListUserTags",
+        "iam:PutUserPolicy",
+        "iam:GetUserPolicy",
+        "iam:DeleteUserPolicy",
+        "iam:ListUserPolicies",
+        "iam:CreateAccessKey",
+        "iam:DeleteAccessKey",
+        "iam:ListAccessKeys"
+      ],
+      "Resource": "arn:aws:iam::*:user/devops-exercise-*-rds-reader-user"
+    },
+    {
       "Effect": "Allow",
       "Action": [
         "iam:CreatePolicy",
@@ -216,14 +186,11 @@
         "iam:UntagPolicy"
       ],
       "Resource": [
-        "arn:aws:iam::*:policy/aws-lbc-testing-*",
-        "arn:aws:iam::*:policy/aws-lbc-production-*",
-        "arn:aws:iam::*:policy/aws-ca-testing-*",
-        "arn:aws:iam::*:policy/aws-ca-production-*"
+        "arn:aws:iam::*:policy/aws-lbc-*",
+        "arn:aws:iam::*:policy/aws-ca-*"
       ]
     },
     {
-      "Sid": "ManageExerciseOidcProviders",
       "Effect": "Allow",
       "Action": [
         "iam:CreateOpenIDConnectProvider",
@@ -234,18 +201,27 @@
       "Resource": "arn:aws:iam::*:oidc-provider/*"
     },
     {
-      "Sid": "AttachOnlyRequiredPoliciesToExerciseRoles",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateInstanceProfile",
+        "iam:DeleteInstanceProfile",
+        "iam:AddRoleToInstanceProfile",
+        "iam:RemoveRoleFromInstanceProfile",
+        "iam:TagInstanceProfile",
+        "iam:UntagInstanceProfile"
+      ],
+      "Resource": "arn:aws:iam::*:instance-profile/devops-exercise-*"
+    },
+    {
       "Effect": "Allow",
       "Action": [
         "iam:AttachRolePolicy",
         "iam:DetachRolePolicy"
       ],
       "Resource": [
-        "arn:aws:iam::*:role/devops-exercise-*-eu-north-1-*",
-        "arn:aws:iam::*:role/aws-lbc-testing-*",
-        "arn:aws:iam::*:role/aws-lbc-production-*",
-        "arn:aws:iam::*:role/aws-ca-testing-*",
-        "arn:aws:iam::*:role/aws-ca-production-*"
+        "arn:aws:iam::*:role/devops-exercise-*",
+        "arn:aws:iam::*:role/aws-lbc-*",
+        "arn:aws:iam::*:role/aws-ca-*"
       ],
       "Condition": {
         "ArnLike": {
@@ -254,16 +230,14 @@
             "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
             "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
             "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
-            "arn:aws:iam::*:policy/aws-lbc-testing-*",
-            "arn:aws:iam::*:policy/aws-lbc-production-*",
-            "arn:aws:iam::*:policy/aws-ca-testing-*",
-            "arn:aws:iam::*:policy/aws-ca-production-*"
+            "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+            "arn:aws:iam::*:policy/aws-lbc-*",
+            "arn:aws:iam::*:policy/aws-ca-*"
           ]
         }
       }
     },
     {
-      "Sid": "CreateRequiredEksServiceLinkedRoles",
       "Effect": "Allow",
       "Action": "iam:CreateServiceLinkedRole",
       "Resource": "*",
@@ -279,10 +253,9 @@
       }
     },
     {
-      "Sid": "PassOnlyExerciseRolesToTheirAwsServices",
       "Effect": "Allow",
       "Action": "iam:PassRole",
-      "Resource": "arn:aws:iam::*:role/devops-exercise-*-eu-north-1-*",
+      "Resource": "arn:aws:iam::*:role/devops-exercise-*",
       "Condition": {
         "StringEquals": {
           "iam:PassedToService": [
@@ -291,6 +264,40 @@
           ]
         }
       }
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ssm:GetParameter",
+      "Resource": "arn:aws:ssm:*::parameter/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ssm:DescribeInstanceInformation",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ssm:StartSession",
+      "Resource": "arn:aws:ec2:*:*:instance/*",
+      "Condition": {
+        "StringLike": {
+          "ssm:resourceTag/Name": "devops-exercise-*-bastion"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ssm:StartSession",
+      "Resource": "arn:aws:ssm:*::document/AWS-StartPortForwardingSessionToRemoteHost"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:TerminateSession",
+        "ssm:ResumeSession",
+        "ssmmessages:OpenDataChannel"
+      ],
+      "Resource": "arn:aws:ssm:*:*:session/${aws:username}-*"
     }
   ]
 }

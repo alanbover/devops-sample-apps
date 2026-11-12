@@ -3,6 +3,11 @@ output "identifier" {
   value       = aws_db_instance.database.identifier
 }
 
+output "resource_id" {
+  description = "RDS resource ID used in IAM database connect ARNs."
+  value       = aws_db_instance.database.resource_id
+}
+
 output "address" {
   description = "Private RDS DNS name."
   value       = aws_db_instance.database.address
@@ -16,6 +21,11 @@ output "port" {
 output "database_name" {
   description = "Initial database name."
   value       = aws_db_instance.database.db_name
+}
+
+output "master_username" {
+  description = "RDS master PostgreSQL role name."
+  value       = aws_db_instance.database.username
 }
 
 output "master_secret_arn" {

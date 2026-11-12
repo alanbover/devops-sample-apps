@@ -1,0 +1,3 @@
+users:
+  - name: reader-user
+    role: readonly
