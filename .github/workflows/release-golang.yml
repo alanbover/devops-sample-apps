@@ -5,7 +5,8 @@ on:
     branches:
       - master
     paths:
-      - "golang/**"
+      - "apps/golang/**"
+      - "!apps/golang/chart/**"
       - ".github/workflows/release-golang.yml"
 
 jobs:
@@ -16,15 +17,15 @@ jobs:
       contents: write
       pull-requests: write
     outputs:
-      release_created: ${{ steps.release.outputs['golang--release_created'] }}
-      version: ${{ steps.release.outputs['golang--version'] }}
+      release_created: ${{ steps.release.outputs['apps/golang--release_created'] }}
+      version: ${{ steps.release.outputs['apps/golang--version'] }}
     steps:
       - name: Create or update Go release pull request
         id: release
         uses: googleapis/release-please-action@v5
         with:
-          config-file: golang/release-please-config.json
-          manifest-file: golang/.release-please-manifest.json
+          config-file: apps/golang/release-please-config.json
+          manifest-file: apps/golang/.release-please-manifest.json
 
   build:
     name: Build and publish Go release image
@@ -35,6 +36,6 @@ jobs:
       contents: read
       packages: write
     with:
-      build_context: ./golang
+      build_context: ./apps/golang
       image_name: devops-sample-apps-golang
       release_version: ${{ needs.release.outputs.version }}

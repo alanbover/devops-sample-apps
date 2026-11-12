@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: sample-applications
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  generators:
+    - matrix:
+        generators:
+          - clusters:
+              selector:
+                matchExpressions:
+                  - key: environment
+                    operator: In
+                    values:
+                      - testing
+                      - production
+          - git:
+              repoURL: https://github.com/alanbover/devops-sample-apps.git
+              revision: master
+              files:
+                - path: deployment/apps/charts/*/application.yaml
+  template:
+    metadata:
+      name: '{{ .appName }}'
+      namespace: argocd
+    spec:
+      project: default
+      sources:
+        - repoURL: https://github.com/alanbover/devops-sample-apps.git
+          targetRevision: master
+          ref: values
+        - repoURL: https://github.com/alanbover/devops-sample-apps.git
+          targetRevision: master
+          path: '{{ .chartPath }}'
+          helm:
+            valueFiles:
+              - '$values/deployment/apps/values/{{ .metadata.labels.environment }}/common.yaml'
+              - '$values/deployment/apps/values/{{ .metadata.labels.environment }}/{{ .valuesFile }}'
+      destination:
+        server: '{{ .server }}'
+        namespace: '{{ .namespace }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

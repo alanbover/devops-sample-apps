@@ -1,0 +1,25 @@
+environment: testing
+replicaCount: 2
+
+image:
+  tag: "0.2.0"
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 128Mi
+
+ingress:
+  enabled: true
+  className: alb
+  path: /api/v1/
+  pathType: Prefix

@@ -5,7 +5,8 @@ on:
     branches:
       - master
     paths:
-      - "php/**"
+      - "apps/php/**"
+      - "!apps/php/chart/**"
       - ".github/workflows/release-php.yml"
 
 jobs:
@@ -16,15 +17,15 @@ jobs:
       contents: write
       pull-requests: write
     outputs:
-      release_created: ${{ steps.release.outputs['php--release_created'] }}
-      version: ${{ steps.release.outputs['php--version'] }}
+      release_created: ${{ steps.release.outputs['apps/php--release_created'] }}
+      version: ${{ steps.release.outputs['apps/php--version'] }}
     steps:
       - name: Create or update PHP release pull request
         id: release
         uses: googleapis/release-please-action@v5
         with:
-          config-file: php/release-please-config.json
-          manifest-file: php/.release-please-manifest.json
+          config-file: apps/php/release-please-config.json
+          manifest-file: apps/php/.release-please-manifest.json
 
   build:
     name: Build and publish PHP release image
@@ -35,6 +36,6 @@ jobs:
       contents: read
       packages: write
     with:
-      build_context: ./php
+      build_context: ./apps/php
       image_name: devops-sample-apps-php
       release_version: ${{ needs.release.outputs.version }}

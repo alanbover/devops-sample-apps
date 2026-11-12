@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "include-component-in-tag": true,
+  "packages": {
+    "apps/golang": {
+      "component": "golang",
+      "release-type": "simple",
+      "exclude-paths": [
+        "apps/golang/chart",
+        "apps/golang/release-please-config.json"
+      ],
+      "version-file": "VERSION",
+      "changelog-path": "CHANGELOG.md"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+nameOverride: ""
+fullnameOverride: ""
+environment: testing
+
+replicaCount: 2
+
+image:
+  repository: ghcr.io/alanbover/devops-sample-apps-php
+  tag: "0.2.0"
+  pullPolicy: IfNotPresent
+
+appEnv: testing
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 128Mi

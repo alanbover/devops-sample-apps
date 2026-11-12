@@ -1,0 +1,4 @@
+appName: golang
+namespace: golang
+chartPath: apps/golang/chart
+valuesFile: golang.yaml

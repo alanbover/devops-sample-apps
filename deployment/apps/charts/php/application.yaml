@@ -1,0 +1,4 @@
+appName: php
+namespace: php
+chartPath: apps/php/chart
+valuesFile: php.yaml

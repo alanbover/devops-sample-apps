@@ -1,0 +1,8 @@
+ingress:
+  annotations:
+    alb.ingress.kubernetes.io/group.name: devops-exercise-production
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/tags: Project=devops-exercise,Environment=production

@@ -1,0 +1,27 @@
+environment: production
+replicaCount: 3
+
+image:
+  tag: "0.2.0"
+
+appEnv: prod
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 65
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 128Mi
+  limits:
+    cpu: "1"
+    memory: 256Mi
+
+ingress:
+  enabled: true
+  className: alb
+  path: /api/v2/
+  pathType: Prefix

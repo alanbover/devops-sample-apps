@@ -1,12 +1,12 @@
 version: 2
 updates:
   - package-ecosystem: docker
-    directory: /golang
+    directory: /apps/golang
     schedule:
       interval: weekly
 
   - package-ecosystem: docker
-    directory: /php
+    directory: /apps/php
     schedule:
       interval: weekly
 

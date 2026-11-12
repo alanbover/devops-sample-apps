@@ -21,8 +21,8 @@ permissions:
   packages: write
 
 concurrency:
-  group: publish-${{ inputs.image_name }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: publish-${{ inputs.image_name }}-${{ inputs.release_version }}
+  cancel-in-progress: false
 
 jobs:
   publish:

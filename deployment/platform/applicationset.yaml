@@ -1,0 +1,61 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: platform-applications
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  generators:
+    - matrix:
+        generators:
+          - clusters:
+              selector:
+                matchExpressions:
+                  - key: environment
+                    operator: In
+                    values:
+                      - testing
+                      - production
+          - git:
+              repoURL: https://github.com/alanbover/devops-sample-apps.git
+              revision: master
+              files:
+                - path: deployment/platform/charts/*/application.yaml
+  template:
+    metadata:
+      name: '{{ .appName }}-{{ .metadata.labels.environment }}'
+      namespace: argocd
+    spec:
+      project: default
+      destination:
+        server: '{{ .server }}'
+        namespace: '{{ .namespace }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+  templatePatch: |
+    spec:
+      sources:
+        - repoURL: https://github.com/alanbover/devops-sample-apps.git
+          targetRevision: master
+          ref: values
+        - repoURL: {{ .repoURL | toJson }}
+          chart: {{ .chart | toJson }}
+          targetRevision: {{ .chartVersion | toJson }}
+          helm:
+            valueFiles:
+              - {{ printf "$values/deployment/platform/values/%s/%s" (index .metadata.labels "environment") .valuesFile | toJson }}
+            {{- if eq .clusterMetadata "true" }}
+            parameters:
+              - name: clusterName
+                value: {{ .name | toJson }}
+              - name: region
+                value: {{ index .metadata.labels "devops-exercise.io/aws-region" | toJson }}
+              - name: vpcId
+                value: {{ index .metadata.labels "devops-exercise.io/aws-vpc-id" | toJson }}
+              - name: 'serviceAccount.annotations.eks\.amazonaws\.com/role-arn'
+                value: {{ index .metadata.annotations "devops-exercise.io/aws-lbc-role-arn" | toJson }}
+            {{- end }}

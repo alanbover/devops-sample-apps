@@ -1,0 +1,7 @@
+appName: aws-load-balancer-controller
+repoURL: https://aws.github.io/eks-charts
+chart: aws-load-balancer-controller
+chartVersion: "3.6.2"
+namespace: kube-system
+valuesFile: aws-load-balancer-controller.yaml
+clusterMetadata: "true"
