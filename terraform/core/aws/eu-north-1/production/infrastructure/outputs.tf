@@ -63,3 +63,8 @@ output "aws_load_balancer_controller_role_arn" {
   description = "Production AWS Load Balancer Controller IRSA role ARN."
   value       = module.eks.aws_load_balancer_controller_role_arn
 }
+
+output "cluster_autoscaler_role_arn" {
+  description = "Production Cluster Autoscaler IRSA role ARN."
+  value       = module.eks.cluster_autoscaler_role_arn
+}

@@ -17,6 +17,11 @@ resource "aws_eks_node_group" "workers" {
     max_unavailable = var.node_max_unavailable
   }
 
+  lifecycle {
+    # Cluster Autoscaler owns the desired size after the node group is created.
+    ignore_changes = [scaling_config[0].desired_size]
+  }
+
   tags = local.tags
 
   depends_on = [

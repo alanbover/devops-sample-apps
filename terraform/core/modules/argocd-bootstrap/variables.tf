@@ -28,6 +28,11 @@ variable "aws_load_balancer_controller_role_arn" {
   type        = string
 }
 
+variable "cluster_autoscaler_role_arn" {
+  description = "IRSA role ARN for Cluster Autoscaler."
+  type        = string
+}
+
 variable "target_revision" {
   description = "Git revision Argo CD tracks for the deployment configuration."
   type        = string

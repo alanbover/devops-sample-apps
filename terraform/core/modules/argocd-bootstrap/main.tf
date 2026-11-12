@@ -13,12 +13,14 @@ resource "helm_release" "argocd" {
         (var.cluster_name) = {
           server = "https://kubernetes.default.svc"
           labels = {
-            environment                     = var.environment
-            "devops-exercise.io/aws-region" = var.aws_region
-            "devops-exercise.io/aws-vpc-id" = var.vpc_id
+            environment                       = var.environment
+            "devops-exercise.io/cluster-name" = var.cluster_name
+            "devops-exercise.io/aws-region"   = var.aws_region
+            "devops-exercise.io/aws-vpc-id"   = var.vpc_id
           }
           annotations = {
             "devops-exercise.io/aws-lbc-role-arn" = var.aws_load_balancer_controller_role_arn
+            "devops-exercise.io/aws-ca-role-arn"  = var.cluster_autoscaler_role_arn
           }
           config = {
             tlsClientConfig = {
