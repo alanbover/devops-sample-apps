@@ -1,0 +1,16 @@
+appName: cluster-autoscaler
+repoURL: https://kubernetes.github.io/autoscaler
+chart: cluster-autoscaler
+chartVersion: "9.60.0"
+namespace: kube-system
+valuesFile: cluster-autoscaler.yaml
+helmParameters:
+  - name: autoDiscovery.clusterName
+    source: labels
+    key: devops-exercise.io/cluster-name
+  - name: awsRegion
+    source: labels
+    key: devops-exercise.io/aws-region
+  - name: 'rbac.serviceAccount.annotations.eks\.amazonaws\.com/role-arn'
+    source: annotations
+    key: devops-exercise.io/aws-ca-role-arn

@@ -4,4 +4,16 @@ chart: aws-load-balancer-controller
 chartVersion: "3.6.2"
 namespace: kube-system
 valuesFile: aws-load-balancer-controller.yaml
-clusterMetadata: "true"
+helmParameters:
+  - name: clusterName
+    source: labels
+    key: devops-exercise.io/cluster-name
+  - name: region
+    source: labels
+    key: devops-exercise.io/aws-region
+  - name: vpcId
+    source: labels
+    key: devops-exercise.io/aws-vpc-id
+  - name: 'serviceAccount.annotations.eks\.amazonaws\.com/role-arn'
+    source: annotations
+    key: devops-exercise.io/aws-lbc-role-arn

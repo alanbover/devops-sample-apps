@@ -144,7 +144,9 @@
       "Resource": [
         "arn:aws:iam::*:role/devops-exercise-*-eu-north-1-*",
         "arn:aws:iam::*:role/aws-lbc-testing-*",
-        "arn:aws:iam::*:role/aws-lbc-production-*"
+        "arn:aws:iam::*:role/aws-lbc-production-*",
+        "arn:aws:iam::*:role/aws-ca-testing-*",
+        "arn:aws:iam::*:role/aws-ca-production-*"
       ]
     },
     {
@@ -160,7 +162,9 @@
       ],
       "Resource": [
         "arn:aws:iam::*:policy/aws-lbc-testing-*",
-        "arn:aws:iam::*:policy/aws-lbc-production-*"
+        "arn:aws:iam::*:policy/aws-lbc-production-*",
+        "arn:aws:iam::*:policy/aws-ca-testing-*",
+        "arn:aws:iam::*:policy/aws-ca-production-*"
       ]
     },
     {
@@ -184,7 +188,9 @@
       "Resource": [
         "arn:aws:iam::*:role/devops-exercise-*-eu-north-1-*",
         "arn:aws:iam::*:role/aws-lbc-testing-*",
-        "arn:aws:iam::*:role/aws-lbc-production-*"
+        "arn:aws:iam::*:role/aws-lbc-production-*",
+        "arn:aws:iam::*:role/aws-ca-testing-*",
+        "arn:aws:iam::*:role/aws-ca-production-*"
       ],
       "Condition": {
         "ArnLike": {
@@ -194,7 +200,9 @@
             "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
             "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
             "arn:aws:iam::*:policy/aws-lbc-testing-*",
-            "arn:aws:iam::*:policy/aws-lbc-production-*"
+            "arn:aws:iam::*:policy/aws-lbc-production-*",
+            "arn:aws:iam::*:policy/aws-ca-testing-*",
+            "arn:aws:iam::*:policy/aws-ca-production-*"
           ]
         }
       }

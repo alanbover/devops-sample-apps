@@ -48,14 +48,10 @@ spec:
           helm:
             valueFiles:
               - {{ printf "$values/deployment/platform/values/%s/%s" (index .metadata.labels "environment") .valuesFile | toJson }}
-            {{- if eq .clusterMetadata "true" }}
+            {{- with (get . "helmParameters") }}
             parameters:
-              - name: clusterName
-                value: {{ .name | toJson }}
-              - name: region
-                value: {{ index .metadata.labels "devops-exercise.io/aws-region" | toJson }}
-              - name: vpcId
-                value: {{ index .metadata.labels "devops-exercise.io/aws-vpc-id" | toJson }}
-              - name: 'serviceAccount.annotations.eks\.amazonaws\.com/role-arn'
-                value: {{ index .metadata.annotations "devops-exercise.io/aws-lbc-role-arn" | toJson }}
+              {{- range . }}
+              - name: {{ .name | toJson }}
+                value: {{ index $.metadata .source .key | toJson }}
+              {{- end }}
             {{- end }}

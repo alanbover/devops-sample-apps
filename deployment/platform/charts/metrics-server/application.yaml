@@ -4,4 +4,3 @@ chart: metrics-server
 chartVersion: "3.14.0"
 namespace: kube-system
 valuesFile: metrics-server.yaml
-clusterMetadata: "false"

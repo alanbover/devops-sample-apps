@@ -64,3 +64,8 @@ output "aws_load_balancer_controller_role_arn" {
   value       = module.eks.aws_load_balancer_controller_role_arn
 }
 
+output "cluster_autoscaler_role_arn" {
+  description = "Testing Cluster Autoscaler IRSA role ARN."
+  value       = module.eks.cluster_autoscaler_role_arn
+}
+
