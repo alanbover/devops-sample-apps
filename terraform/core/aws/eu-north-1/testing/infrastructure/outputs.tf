@@ -28,6 +28,16 @@ output "nat_eip_public_ip" {
   value       = module.vpc.nat_eip_public_ip
 }
 
+output "bastion_instance_id" {
+  description = "Testing SSM-managed private EC2 instance ID."
+  value       = module.bastion.instance_id
+}
+
+output "bastion_security_group_id" {
+  description = "Testing bastion security group ID for private destination access."
+  value       = module.bastion.security_group_id
+}
+
 output "aws_region" {
   description = "Region containing the testing resources."
   value       = "eu-north-1"
