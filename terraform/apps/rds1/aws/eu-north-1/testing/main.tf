@@ -26,7 +26,8 @@ module "rds" {
 module "postgresql_users" {
   source = "../../../../modules/aws-rds-users"
 
-  providers = { postgresql = postgresql }
+  providers  = { postgresql = postgresql }
+  depends_on = [module.rds]
 
   database_name   = module.rds.database_name
   master_username = module.rds.master_username

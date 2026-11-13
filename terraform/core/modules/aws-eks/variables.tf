@@ -39,9 +39,9 @@ variable "vpc_id" {
 }
 
 variable "cluster_api_security_group_ids" {
-  description = "Security groups allowed to reach the private Kubernetes API on TCP 443."
-  type        = set(string)
-  default     = []
+  description = "Named security groups allowed to reach the private Kubernetes API on TCP 443."
+  type        = map(string)
+  default     = {}
 }
 
 variable "endpoint_public_access" {

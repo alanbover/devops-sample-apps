@@ -9,7 +9,7 @@ locals {
   # subnets substantially more capacity.
   public_subnet_cidrs = {
     "eu-north-1a" = "10.20.16.0/26"
-    "eu-north-1b" = "10.20.31.192/26"
+    "eu-north-1b" = "10.20.16.64/26"
   }
   private_subnet_cidrs = {
     "eu-north-1a" = "10.20.20.0/22"
