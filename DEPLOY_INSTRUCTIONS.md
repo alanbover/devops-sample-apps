@@ -41,7 +41,7 @@ export AWS_PROFILE=deployment
 Path: `terraform/core/aws/eu-north-1/testing/infrastructure`
 Path: `terraform/core/aws/eu-north-1/production/infrastructure`
 
-Each environment has an independent VPC, EKS cluster, NAT gateway, private bastion, and Terraform state file.
+Each environment has an independent VPC, EKS cluster, NAT gateway and private bastion.
 
 ## 4. Bootstrap Argo CD
 
