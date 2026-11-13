@@ -30,8 +30,6 @@ The deployment flow is:
 
 ![Devops sample apps infrastructure architecture](docs/infrastructure-architecture.png)
 
-The diagram distinguishes public or internet-facing resources in blue from private-IP-only resources in green. Terraform state and operator access are shown outside the environment VPCs; SSM provides the controlled path through each private bastion to the EKS API and optional RDS instance.
-
 ## Network address plan
 
 Each environment has an independent VPC with a non-overlapping `/20` CIDR:
@@ -53,8 +51,6 @@ Each `/20` provides 4,096 addresses. The current layout uses two public and two 
 The public `/26` subnets are intended for internet-facing load balancers and provide address headroom for additional load-balancer IPs. The private `/22` subnets provide capacity for EKS nodes, pods, the bastion, and other internal resources. They use the NAT gateway for outbound access and do not assign public IPs.
 
 The subnet maps are keyed by Availability Zone. To add another AZ, add a non-overlapping public/private CIDR pair from the unused part of the `/20`; the VPC module creates the subnets and route associations, and EKS consumes the expanded private-subnet map. The unused ranges are deliberate and reserved for future AZs or growth.
-
-These reservations are kept in Terraform for this exercise. In a larger organization, AWS VPC IPAM could centrally allocate, track, and audit the ranges across additional regions and accounts.
 
 ## Releases
 
@@ -80,8 +76,6 @@ For continuous operation in `eu-north-1`, the current two-environment layout is 
 | Two NAT gateways, excluding traffic processing | ~$66 |
 | Optional testing RDS `db.t4g.small` and 20 GiB storage | ~$30–$40 |
 | EBS and other baseline usage | Small additional amount |
-
-This is an indicative estimate using on-demand rates and approximately 730 hours per month; AWS prices vary by region and usage. NAT data processing, load balancers, CloudWatch logs, RDS backups, and database I/O can materially increase the total. Stopping or destroying non-production environments is the simplest cost-control measure.
 
 ## Improvements
 The improvements below were intentionally left out of the exercise due to time constraints.
