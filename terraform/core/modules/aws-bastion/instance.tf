@@ -18,5 +18,8 @@ resource "aws_instance" "bastion" {
 
   tags = { Name = var.name }
 
-  depends_on = [aws_iam_role_policy_attachment.ssm]
+  depends_on = [
+    aws_iam_role_policy_attachment.ssm,
+    aws_vpc_security_group_egress_rule.ssm,
+  ]
 }
