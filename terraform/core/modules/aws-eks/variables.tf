@@ -38,6 +38,12 @@ variable "vpc_id" {
   }
 }
 
+variable "cluster_api_security_group_ids" {
+  description = "Security groups allowed to reach the private Kubernetes API on TCP 443."
+  type        = set(string)
+  default     = []
+}
+
 variable "endpoint_public_access" {
   description = "Whether to enable the EKS public API endpoint. The private endpoint remains enabled."
   type        = bool

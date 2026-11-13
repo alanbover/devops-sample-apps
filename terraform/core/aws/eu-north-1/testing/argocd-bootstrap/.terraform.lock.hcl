@@ -1,6 +1,52 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
+provider "registry.terraform.io/dfns/tunnel" {
+  version     = "1.10.0"
+  constraints = ">= 1.9.6, < 2.0.0"
+  hashes = [
+    "h1:hD1QK4qNIwweULhZgq1M8lGA9G+47RkKX7e6PStpBAE=",
+    "zh:0cc499339adacb7a88f1a28450edf8c07a8eb3ecab1615843f5d4dd8b46fa036",
+    "zh:11becbf84ff48c840a5efc6f4a84f1d26f24c29da6a8b58ec0284461a2a60e1e",
+    "zh:2a445d7294ebce43920534281104f488f7cfa098cf59cab9d8a10572984b00dc",
+    "zh:306985b9723c1c79a540655a73870746094fce67e88a4c1c983176938c996f17",
+    "zh:401543dbf51deb74c9069f65c79ef17e29dac744fec6c98cc6cf08713c57b4dc",
+    "zh:4eb6a36663643175412441e7a3acb1c296c10ddde30d937c073f56911168411f",
+    "zh:80dafa2ecfefd22def271d6dd567400f524eb52ed4ba19dc1a2ce20108565adb",
+    "zh:88fceda1874e3835043dab6428e394fd33048332fec0d261a9037c9bda02d98e",
+    "zh:890df766e9b839623b1f0437355032a3c006226a6c200cd911e15ee1a9014e9f",
+    "zh:b64ae482f4fc4fe45353a4fc6c81e74b90e0da0c32c9d60b28d6ad335eade6a6",
+    "zh:babb69faa62188234bf5118b336e12564ae03058c2cb85021063dd3343fc6839",
+    "zh:bb640bd6429c70b654325de08579c7e1295733220c97b62ad0e1e1bc55989169",
+    "zh:d49211237028f98aa927e4d80ad2e8dcf4347130ea92825315b7dc1a8be1bf35",
+    "zh:fb3f3211e03f58e3c1d50abcce9a0149b068ffa7ca440dbd873e05e99da73bf0",
+  ]
+}
+
+provider "registry.terraform.io/hashicorp/aws" {
+  version     = "6.73.0"
+  constraints = ">= 6.72.0, < 7.0.0"
+  hashes = [
+    "h1:nNijzz9KWdbzuhfrTQrqT3Bm7KmkhoXonVwAasVXTRg=",
+    "zh:0f7403264fbfbcad526a5ddb9553be6ab12dba14e5901d0c2ccabc38d9ccf9a0",
+    "zh:26be4e8afc94ef29c98b8219dc49b19ce21a04d3f2b4e5be6116e9526ece0355",
+    "zh:2ba661a4a782fba053c411ce4d828dc148d7ed3998d073a28370a559400b1578",
+    "zh:2c422d0edd37bf7470c84f1d1f76487f30948768878204a65a18189bf878467a",
+    "zh:49f9d1486d48033d298977f7c288f8bbb22bb246f00926d1cb8b0bb98985451c",
+    "zh:4f946cf11667e1f3bce53fd5ad92eccf47fafaa1bbaa68c742173db61773a1da",
+    "zh:70beb5e13ddcdbeecb2a78be2b75d09a0fc6ce7e69b574c84a90924fd4262406",
+    "zh:8c5b974104ff9a887b29fdb2700cdbb5e6fd2eceef1cc3b28f523beda4fd8dfb",
+    "zh:9252068667bc6528ee6e83e837f3c2f901756136a33442455d61c6fa34e1160a",
+    "zh:9b12af85486a96aedd8d7984b0ff811a4b42e3d88dad1a3fb4c0b580d04fa425",
+    "zh:9d086b792598b43e87502d47c4a3f388465b3a21a6a6b2783e48c89dee1f0543",
+    "zh:b5e6e77a43c1655285d99145b2cf0cc2da7a6c6ea3531d000cf8cca2c717693b",
+    "zh:b7ebe893e5ec76b362b61ffb28c67b40d890e0f59f5f2f8829765b16ee3e53b0",
+    "zh:c8c1e186839ad3cba37b427181af1e62eaf06c6daa5dca29105e1981dfaeb4c2",
+    "zh:e988377e7aea51e1fefe0b52c78bc725a11327051e20a71f81069191ee077d2d",
+    "zh:ee9188027919459a48bf9bac8f8f1dd172f5be198b88c2c47789b6daa8bb8bcb",
+  ]
+}
+
 provider "registry.terraform.io/hashicorp/helm" {
   version     = "3.3.0"
   constraints = ">= 3.3.0"
