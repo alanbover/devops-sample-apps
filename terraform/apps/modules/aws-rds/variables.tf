@@ -14,7 +14,7 @@ variable "private_subnet_ids" {
 }
 
 variable "allowed_security_groups" {
-  description = "Security groups allowed to connect to PostgreSQL, keyed by a stable name. A bastion entry also gets an egress rule to the database."
+  description = "Security groups allowed to connect to PostgreSQL, keyed by a stable name."
   type        = map(string)
 }
 

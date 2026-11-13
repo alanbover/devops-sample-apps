@@ -23,20 +23,6 @@ module "rds" {
   skip_final_snapshot = true
 }
 
-ephemeral "tunnel_ssm" "database" {
-  target_host  = module.rds.address
-  target_port  = module.rds.port
-  ssm_instance = data.terraform_remote_state.testing_infrastructure.outputs.bastion_instance_id
-  ssm_region   = "eu-north-1"
-
-  # The RDS instance and the bastion access rule must exist before connecting.
-  depends_on = [module.rds]
-}
-
-ephemeral "aws_secretsmanager_secret_version" "master" {
-  secret_id = module.rds.master_secret_arn
-}
-
 module "postgresql_users" {
   source = "../../../../modules/aws-rds-users"
 
