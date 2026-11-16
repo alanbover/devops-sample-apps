@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/alanbover/devops-sample-apps/compare/php-v0.2.0...php-v0.3.0) (2026-11-12)
+
+
+### Features
+
+* scaffolding terraform and deployment ([af0ed3c](https://github.com/alanbover/devops-sample-apps/commit/af0ed3c8394738b0efb738a67f6d82b3cb610b5e))
+
 ## [0.2.0](https://github.com/alanbover/devops-sample-apps/compare/php-v0.1.0...php-v0.2.0) (2026-11-09)
 
 
